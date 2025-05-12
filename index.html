@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>방방북북 - 독립서점 지도</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Gugi&family=Song+Myung&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="resources/css/style.css">
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e304da2f95de860342bba46946ad6d5d&libraries=LIBRARY"></script>
+  <script type="module">
+    import { searchBookstores } from './resources/js/bookstoreApi.js';
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchButton = document.getElementById('searchButton');
+        const searchInput = document.getElementById('searchInput');
+        
+        //검색 버튼 클릭 이벤트
+        searchButton.addEventListener('click', () => {
+            searchBookstores(searchInput.value);
+        });
+
+        //엔터 키 이벤트
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchBookstores(searchInput.value);
+            }
+        });
+    });
+</script>
+    <script type="module" src="resources/js/kakaomap.js"></script>
+</head>
+<body>
+    <div id="map"></div>
+
+    <h1 class="gugi-regular">방방북북-독립서점 지도</h1>
+    <div class="search-container">
+        <input type="text" 
+                class="search-box" 
+                placeholder="독립서점의 이름을 검색해보세요:)" 
+                id="searchInput">
+        <button class="search-button" id="searchButton">🔍</button>
+    </div>
+</body>
+</html>
